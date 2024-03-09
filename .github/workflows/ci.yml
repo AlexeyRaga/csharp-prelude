@@ -1,0 +1,107 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+      contents: write
+
+    env:
+      CONFIGURATION: Release
+      TEST_RESULTS_DIR: ./output/test-results
+
+    steps:
+      - name: Get the sources
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Determine repository name
+        id: repo
+        run: |
+          REPOSITORY_NAME="$(echo ${{ github.repository }} | cut -d'/' -f2)"
+          echo "REPOSITORY_NAME=$REPOSITORY_NAME" >> $GITHUB_OUTPUT
+          echo "SONAR_PROJECT_KEY=EducationPerfect_$REPOSITORY_NAME" >> $GITHUB_OUTPUT
+
+      - name: Install .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v0
+        with:
+          versionSpec: '5.x'
+
+      - name: Determine Version
+        id: gitversion
+        uses: gittools/actions/gitversion/execute@v0
+        with:
+          useConfigFile: true
+
+      - name: Install tools
+        run: |
+          dotnet tool install --global dotnet-coverage
+
+      - name: Restore dependencies
+        run: dotnet restore && dotnet tool restore
+
+      - name: Run build
+        run: |
+          dotnet build --no-restore -c ${{ env.CONFIGURATION }} \
+            -p:AssemblyVersion=${{ steps.gitversion.outputs.assemblySemVer }} \
+            -p:ContinuousIntegrationBuild=True \
+            -p:DeterministicSourcePaths=True \
+            -p:RepositoryUrl=https://github.com/${{ github.repository }} \
+            -p:FileVersion=${{ steps.gitversion.outputs.assemblySemVer }} \
+            -p:InformationalVersion=${{ steps.gitversion.outputs.informationalVersion }}
+
+      - name: Run tests
+        run: |
+          COMPONENT_NAME=$(realpath . | xargs basename)
+          dotnet-coverage collect "dotnet test --configuration ${{ env.CONFIGURATION }} --no-build --logger trx --results-directory ${{ env.TEST_RESULTS_DIR }}" -f xml -o "${{ env.TEST_RESULTS_DIR }}/$COMPONENT_NAME.xml"
+
+      - name: Build packages
+        run: |
+          dotnet pack --no-build -c ${{ env.CONFIGURATION }} \
+            -p:PackageVersion=${{ steps.gitversion.outputs.NuGetVersionV2 }} \
+            -o ./packages
+
+      - uses: mukunku/tag-exists-action@v1.5.0
+        id: checkTag
+        if: github.ref == 'refs/heads/main'
+        with:
+          tag: ${{ steps.gitversion.outputs.fullSemVer }}
+
+      - name: Tag published version
+        uses: actions/github-script@v7
+        if: (github.ref == 'refs/heads/main') && (steps.checkTag.outputs.exists == 'false')
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: 'refs/tags/${{ steps.gitversion.outputs.fullSemVer }}',
+              sha: context.sha,
+              force: true
+            })
+
+#      - name: Publish packages
+#        if: ${{ github.ref == 'refs/heads/main' }}
+#        run: |
+#          dotnet nuget push ./packages/*.nupkg \
+#          --source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json \
+#          --api-key ${{ secrets.GITHUB_TOKEN }} \
+#          --skip-duplicate

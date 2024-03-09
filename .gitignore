@@ -1,0 +1,34 @@
+# Build artifacts etc.
+[Bb]in/
+[Oo]bj/
+[Pp]ackages/
+.nuke/temp/
+artifacts/
+
+# Exclude files in logs folder except for placeholders
+*/[Ll]ogs/*
+!*/[Ll]ogs/Placeholder.txt
+
+# IDE-specific
+.idea/
+.vs/
+/_ReSharper.Caches/
+
+# git merge files
+*.orig
+
+# User-specific
+*.suo
+*.user
+
+# Compressed files
+*.zip
+.sonarqube/
+
+# Env files
+.env
+
+/NuGet.Config
+
+# MacOS system files
+.DS_Store
