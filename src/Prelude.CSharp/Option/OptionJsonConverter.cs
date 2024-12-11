@@ -55,10 +55,10 @@ public sealed class OptionJsonConverter<T> : JsonConverter<Option<T>>
     {
         switch (value)
         {
-            case Option<T>.Some some:
-                _valueConverter.Write(writer, some.Value, options);
+            case {IsSome: true} some:
+                _valueConverter.Write(writer, some.UnsafeValue, options);
                 break;
-            case Option<T>.None:
+            default:
                 writer.WriteNullValue();
                 break;
         }

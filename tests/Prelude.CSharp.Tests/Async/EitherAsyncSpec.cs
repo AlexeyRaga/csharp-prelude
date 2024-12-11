@@ -1,4 +1,3 @@
-using Prelude.Experimental;
 using FsCheck.Xunit;
 
 namespace Prelude.CSharp.Tests.Experimental;
@@ -12,7 +11,7 @@ public sealed class EitherAsyncSpec
         Task.FromResult(Either.Left<TLeft, TRight>(value));
 
     [Property]
-    public async Task ShouldMapAsync(int baseAmount, int multiplier)
+    public async Task SelectMany_should_return_computed_value(int baseAmount, int multiplier)
     {
         int Compute(int a, int b, int c) => a * b - c;
 
@@ -27,7 +26,7 @@ public sealed class EitherAsyncSpec
     }
 
     [Property]
-    public async Task ShouldExitWitLeft(int value, string error)
+    public async Task SelectMany_should_return_left_value(int value, string error)
     {
         var result = await
             from v in RightAsync<string, int>(value)
@@ -35,5 +34,16 @@ public sealed class EitherAsyncSpec
             select v + e;
 
         Assert.Equivalent(Either.Left<string, int>(error), result);
+    }
+
+    [Property]
+    public async Task BiSelect_should_map_either_value(Either<string, string> value)
+    {
+        var result = await value
+            .Select(async x => await RightAsync<string, string>(x + "!").ConfigureAwait(false))
+            .SelectManyLeft(async x => await LeftAsync<string, string>(x + "!").ConfigureAwait(false));
+
+        var expected = value.BiSelect(x => x + "!", x => x + "!");
+        Assert.Equivalent(expected, result);
     }
 }

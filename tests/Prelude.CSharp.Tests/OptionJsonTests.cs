@@ -5,7 +5,7 @@ namespace Prelude.CSharp.Tests;
 
 public record Person(string FirstName, Option<string> LastName, Option<int> Age);
 
-public sealed class OptionJsonSpec
+public sealed class OptionJsonTests
 {
     [Property]
     public void ShouldSerialiseSomeString(string value)

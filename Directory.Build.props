@@ -13,9 +13,16 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Company>Education Perfect</Company>
-    <Authors>Education Perfect</Authors>
-    <Copyright>Copyright $([System.DateTime]::Now.Year) Education Perfect</Copyright>
+    <PackageReadmeFile>Readme.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="Readme.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <Authors>Alexey Raga</Authors>
+    <Copyright>Copyright $([System.DateTime]::Now.Year) Alexey Raga</Copyright>
   </PropertyGroup>
 
   <PropertyGroup Condition="$(MSBuildProjectName.EndsWith('Tests'))">
