@@ -2,7 +2,7 @@ using System.Collections.Immutable;
 using FluentAssertions;
 using FsCheck.Xunit;
 
-namespace Prelude.CSharp.Tests;
+namespace Prelude.CSharp.Tests.ValidationTests;
 
 
 public sealed class ValidationTests

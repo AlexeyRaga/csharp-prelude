@@ -1,8 +1,8 @@
 using FsCheck.Xunit;
 
-namespace Prelude.CSharp.Tests.Experimental;
+namespace Prelude.CSharp.Tests.OptionTests;
 
-public sealed class OptionAsyncSpec
+public sealed class OptionAsyncTests
 {
     private static Task<Option<T>> SomeAsync<T>(T value) => Task.FromResult(Option.Some(value));
 

@@ -4,7 +4,7 @@ using FluentAssertions;
 using FsCheck;
 using FsCheck.Xunit;
 
-namespace Prelude.CSharp.Tests;
+namespace Prelude.CSharp.Tests.NonEmptyListTests;
 
 [Properties(Arbitrary = [typeof(PreludeArb)])]
 public sealed class NonEmptyListTests

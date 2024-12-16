@@ -28,4 +28,8 @@
       <ProjectReference Include="..\..\src\Prelude.CSharp.FSCheck\Prelude.CSharp.FSCheck.csproj" />
       <ProjectReference Include="..\..\src\Prelude.CSharp\Prelude.CSharp.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Async\" />
+    </ItemGroup>
 </Project>

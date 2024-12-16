@@ -1,6 +1,6 @@
 using FsCheck.Xunit;
 
-namespace Prelude.CSharp.Tests.Experimental;
+namespace Prelude.CSharp.Tests.EitherTests;
 
 public sealed class EitherAsyncSpec
 {

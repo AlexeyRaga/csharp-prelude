@@ -2,7 +2,7 @@ using FluentAssertions;
 using FsCheck;
 using FsCheck.Xunit;
 
-namespace Prelude.CSharp.Tests;
+namespace Prelude.CSharp.Tests.EitherTests;
 
 public sealed class EitherTests
 {

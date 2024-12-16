@@ -1,7 +1,7 @@
 using System.Text.Json;
 using FsCheck.Xunit;
 
-namespace Prelude.CSharp.Tests;
+namespace Prelude.CSharp.Tests.OptionTests;
 
 public record Person(string FirstName, Option<string> LastName, Option<int> Age);
 
