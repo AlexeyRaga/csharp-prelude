@@ -23,10 +23,7 @@ public static class OptionApplicativeExtensions
     /// </summary>
     public static Option<TResult> Apply<T1, TResult>(
         this Option<Func<T1, TResult>> apply,
-        Option<T1> value)
-    {
-        return ApplyInternal(apply, value, (f, v) => f(v));
-    }
+        Option<T1> value) => ApplyInternal(apply, value, (f, v) => f(v));
 
     /// <summary>
     /// Applies a function with two parameters to a value within an Option context.

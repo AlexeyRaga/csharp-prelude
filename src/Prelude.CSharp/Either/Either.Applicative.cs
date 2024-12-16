@@ -26,10 +26,7 @@ public static class EitherApplicativeExtensions
     /// </summary>
     public static Either<TLeft, TResult> Apply<TLeft, T1, TResult>(
         this Either<TLeft, Func<T1, TResult>> apply,
-        Either<TLeft, T1> value)
-    {
-        return ApplyInternal(apply, value, (f, v) => f(v));
-    }
+        Either<TLeft, T1> value) => ApplyInternal(apply, value, (f, v) => f(v));
 
     /// <summary>
     /// Applies a function with two parameters to a value within an Either context.

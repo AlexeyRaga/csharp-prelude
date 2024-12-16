@@ -5,9 +5,9 @@ namespace Prelude;
 /// <summary>
 /// Provides extension methods for applying Validation functions.
 /// </summary>
-public static class ValidationApplicativeExtensions 
+public static class ValidationApplicativeExtensions
 {
-    private static Either<ImmutableList<TLeft>, TResult> Combine<TLeft, T1, T2, TResult>(
+    private static Either<ImmutableList<TLeft>, TResult> ApplyInternal<TLeft, T1, T2, TResult>(
         Either<ImmutableList<TLeft>, T1> value1,
         Either<ImmutableList<TLeft>, T2> value2,
         Func<T1, T2, TResult> resultSelector)
@@ -31,7 +31,7 @@ public static class ValidationApplicativeExtensions
         this Validation<TLeft, Func<T1, TResult>> apply,
         Either<TLeft, T1> value)
     {
-        var rrr = Combine(apply.Either, value.SelectLeft(ImmutableList.Create), (x1, x2) => x1(x2));
+        var rrr = ApplyInternal(apply.Either, value.SelectLeft(ImmutableList.Create), (x1, x2) => x1(x2));
         return new Validation<TLeft, TResult>(rrr);
     }
 
@@ -41,8 +41,8 @@ public static class ValidationApplicativeExtensions
     public static Validation<TLeft, Func<T2, TResult>> Apply<TLeft, T1, T2, TResult>(
         this Validation<TLeft, Func<T1, T2, TResult>> apply,
         Either<TLeft, T1> value)
-    { 
-        var res = Combine(apply.Either, value.SelectLeft(ImmutableList.Create), (f, x) =>
+    {
+        var res = ApplyInternal(apply.Either, value.SelectLeft(ImmutableList.Create), (f, x) =>
         {
             var g = (T2 t) => f(x, t);
             return g;
@@ -58,7 +58,7 @@ public static class ValidationApplicativeExtensions
         this Validation<TLeft, Func<T1, T2, T3, TResult>> apply,
         Either<TLeft, T1> value)
     {
-        var res = Combine(apply.Either, value.SelectLeft(ImmutableList.Create), (f, t1) =>
+        var res = ApplyInternal(apply.Either, value.SelectLeft(ImmutableList.Create), (f, t1) =>
         {
             var g = (T2 t2, T3 t3) => f(t1, t2, t3);
             return g;
@@ -74,7 +74,7 @@ public static class ValidationApplicativeExtensions
         this Validation<TLeft, Func<T1, T2, T3, T4, TResult>> apply,
         Either<TLeft, T1> value)
     {
-        var res = Combine(apply.Either, value.SelectLeft(ImmutableList.Create), (f, t1) =>
+        var res = ApplyInternal(apply.Either, value.SelectLeft(ImmutableList.Create), (f, t1) =>
         {
             var g = (T2 t2, T3 t3, T4 t4) => f(t1, t2, t3, t4);
             return g;
@@ -90,7 +90,7 @@ public static class ValidationApplicativeExtensions
         this Validation<TLeft, Func<T1, T2, T3, T4, T5, TResult>> apply,
         Either<TLeft, T1> value)
     {
-        var res = Combine(apply.Either, value.SelectLeft(ImmutableList.Create), (f, t1) =>
+        var res = ApplyInternal(apply.Either, value.SelectLeft(ImmutableList.Create), (f, t1) =>
         {
             var g = (T2 t2, T3 t3, T4 t4, T5 t5) => f(t1, t2, t3, t4, t5);
             return g;
@@ -106,7 +106,7 @@ public static class ValidationApplicativeExtensions
         this Validation<TLeft, Func<T1, T2, T3, T4, T5, T6, TResult>> apply,
         Either<TLeft, T1> value)
     {
-        var res = Combine(apply.Either, value.SelectLeft(ImmutableList.Create), (f, t1) =>
+        var res = ApplyInternal(apply.Either, value.SelectLeft(ImmutableList.Create), (f, t1) =>
         {
             var g = (T2 t2, T3 t3, T4 t4, T5 t5, T6 t6) => f(t1, t2, t3, t4, t5, t6);
             return g;
@@ -122,7 +122,7 @@ public static class ValidationApplicativeExtensions
         this Validation<TLeft, Func<T1, T2, T3, T4, T5, T6, T7, TResult>> apply,
         Either<TLeft, T1> value)
     {
-        var res = Combine(apply.Either, value.SelectLeft(ImmutableList.Create), (f, t1) =>
+        var res = ApplyInternal(apply.Either, value.SelectLeft(ImmutableList.Create), (f, t1) =>
         {
             var g = (T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7) => f(t1, t2, t3, t4, t5, t6, t7);
             return g;
@@ -138,7 +138,7 @@ public static class ValidationApplicativeExtensions
         this Validation<TLeft, Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult>> apply,
         Either<TLeft, T1> value)
     {
-        var res = Combine(apply.Either, value.SelectLeft(ImmutableList.Create), (f, t1) =>
+        var res = ApplyInternal(apply.Either, value.SelectLeft(ImmutableList.Create), (f, t1) =>
         {
             var g = (T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8) => f(t1, t2, t3, t4, t5, t6, t7, t8);
             return g;
