@@ -28,5 +28,4 @@
       <ProjectReference Include="..\..\src\Prelude.CSharp.FSCheck\Prelude.CSharp.FSCheck.csproj" />
       <ProjectReference Include="..\..\src\Prelude.CSharp\Prelude.CSharp.csproj" />
     </ItemGroup>
-
 </Project>

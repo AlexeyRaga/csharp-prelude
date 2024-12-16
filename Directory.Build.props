@@ -16,7 +16,7 @@
     <PackageReadmeFile>Readme.md</PackageReadmeFile>
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(IsPackable)' != 'False'">
     <None Include="Readme.md" Pack="true" PackagePath="" />
   </ItemGroup>
 
