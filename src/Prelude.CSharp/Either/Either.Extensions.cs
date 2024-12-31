@@ -35,6 +35,7 @@ public static class EitherExtensions
     /// <param name="source">The either instance to extract the value from.</param>
     /// <param name="defaultValue">The value to return if the value is in the "Left" state.</param>
     /// <returns>The contained value if "Right"; otherwise, the specified default value.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static TRight GetRightOrDefault<TLeft, TRight>(this Either<TLeft, TRight> source, TRight defaultValue) =>
         source.Fold(_ => defaultValue, x => x);
 
@@ -45,6 +46,7 @@ public static class EitherExtensions
     /// <param name="source">The either instance to extract the value from.</param>
     /// <param name="defaultValue">The value to return if the value is in the "Left" state.</param>
     /// <returns>The contained value if "Right"; otherwise, the specified default value.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static TRight GetRightOrDefault<TLeft, TRight>(this Either<TLeft, TRight> source, Func<TRight> defaultValue) =>
         source.Fold(_ => defaultValue(), x => x);
 
@@ -55,6 +57,7 @@ public static class EitherExtensions
     /// <param name="source">The either instance to extract the value from.</param>
     /// <param name="defaultValue">The value to return if the value is in the "Right" state.</param>
     /// <returns>The contained value if "Left"; otherwise, the specified default value.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static TLeft GetLeftOrDefault<TLeft, TRight>(this Either<TLeft, TRight> source, TLeft defaultValue) =>
         source.Fold(x => x, _ => defaultValue);
 
@@ -65,6 +68,7 @@ public static class EitherExtensions
     /// <param name="source">The either instance to extract the value from.</param>
     /// <param name="defaultValue">The value to return if the value is in the "Right" state.</param>
     /// <returns>The contained value if "Left"; otherwise, the specified default value.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static TLeft GetLeftOrDefault<TLeft, TRight>(this Either<TLeft, TRight> source, Func<TLeft> defaultValue) =>
         source.Fold(x => x, _ => defaultValue());
 
@@ -481,6 +485,7 @@ public static class EitherExtensions
     /// This method does not handle accumulation of "Left" values by default. If you need to accumulate errors,
     /// ensure <typeparamref name="TLeft"/> supports such operations (e.g., a list of errors).
     /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Either<TLeft, TRight> Combine<TLeft, TRight>(
         this Either<TLeft, TRight> first,
         Either<TLeft, TRight> second,
