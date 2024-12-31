@@ -5,16 +5,16 @@ namespace Prelude.Tests;
 public sealed class ThenExtensionsTests
 {
     [Property]
-    public void Then_PipelineWithMultipleParameters(int x, int y, int z)
+    public void Then_PipelineWithMultipleParameters(int x, int y)
     {
-        int AddThreeNumbers(int a, int b, int c) => a + b + c;
-        int MultiplyFourNumbers(int a, int b, int c, int d) => a * b * c * d;
+        int IncreaseBy(int a, int b) => a + b;
+        int MultiplyBy(int a, int b, int c) => a * b * c;
 
         var result = x
-            .Then(AddThreeNumbers, y, z)
-            .Then(MultiplyFourNumbers, x, y, z);
+            .Then(IncreaseBy, y)
+            .Then(MultiplyBy, x, y);
 
-        var expected = MultiplyFourNumbers(AddThreeNumbers(x, y, z), x, y, z);
+        var expected = MultiplyBy(IncreaseBy(x, y), x, y);
 
         Assert.Equal(expected, result);
     }

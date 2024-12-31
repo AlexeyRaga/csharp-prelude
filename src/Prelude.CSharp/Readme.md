@@ -212,7 +212,8 @@ In this example, if any of the `Either` instances contain errors, they will be a
 
 ## Pipelines
 
-The `Then` extension method allows you to chain function calls in a pipeline style, making your code more readable and expressive.
+The `Then` extension method allows you to chain function calls in a pipeline style,
+making your code more readable and expressive.
 
 ### Example
 
@@ -220,11 +221,11 @@ Here's an example of using `Then` as a pipeline operator:
 
 ```csharp
 int Add(int x, int y) => x + y;
-int Multiply(int x, int y) => x * y;
+int MultiplyBy(int x, int y) => x * y;
 
 var result = 5
     .Then(Add, 3)
-    .Then(Multiply, 2);
+    .Then(MultiplyBy, 2);
 
 // result is 16
 ```
