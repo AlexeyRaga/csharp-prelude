@@ -1,19 +1,21 @@
 # Prelude
 
 - [Prelude](#prelude)
-    - [Option Pattern](#option-pattern)
-        - [Creating an Option](#creating-an-option)
-        - [Using an Option](#using-an-option)
-        - [Example](#example)
-        - [Json serialisation](#json-serialisation)
-    - [Either Pattern](#either-pattern)
-        - [Creating an Either](#creating-an-either)
-        - [Using an Either](#using-an-either)
-        - [Example](#example-1)
-    - [Applicative Validation Pattern](#applicative-validation-pattern)
-        - [Creating a Validation](#creating-a-validation)
-        - [Using a Validation](#using-a-validation)
-        - [Example](#example-2)
+  - [Option Pattern](#option-pattern)
+    - [Creating an Option](#creating-an-option)
+    - [Using an Option](#using-an-option)
+    - [Example](#example)
+    - [Json serialisation](#json-serialisation)
+  - [Either Pattern](#either-pattern)
+    - [Creating an Either](#creating-an-either)
+    - [Using an Either](#using-an-either)
+    - [Example](#example-1)
+  - [Applicative Validation Pattern](#applicative-validation-pattern)
+    - [Creating a Validation](#creating-a-validation)
+    - [Using a Validation](#using-a-validation)
+    - [Example](#example-2)
+  - [Pipelines](#pipelines)
+    - [Example](#example-3)
 
 ## Option Pattern
 
@@ -207,3 +209,22 @@ Either<ImmutableList<string>, ContactInfo> contact = Validation<string>
 ```
 
 In this example, if any of the `Either` instances contain errors, they will be accumulated in the resulting `Either`.
+
+## Pipelines
+
+The `Then` extension method allows you to chain function calls in a pipeline style, making your code more readable and expressive.
+
+### Example
+
+Here's an example of using `Then` as a pipeline operator:
+
+```csharp
+int Add(int x, int y) => x + y;
+int Multiply(int x, int y) => x * y;
+
+var result = 5
+    .Then(Add, 3)
+    .Then(Multiply, 2);
+
+// result is 16
+```
