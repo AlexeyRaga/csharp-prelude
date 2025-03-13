@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prelude.CSharp.Tests", "tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prelude.CSharp.FSCheck", "src\Prelude.CSharp.FSCheck\Prelude.CSharp.FSCheck.csproj", "{91138BE7-C396-43B5-B907-CEC3CB871CFF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prelude.CSharp.Hedgehog", "Prelude.CSharp.Hedgehog\Prelude.CSharp.Hedgehog.csproj", "{D0142F72-DE4D-4A0C-9876-9C2161E5088B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,10 +30,15 @@ Global
 		{91138BE7-C396-43B5-B907-CEC3CB871CFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91138BE7-C396-43B5-B907-CEC3CB871CFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91138BE7-C396-43B5-B907-CEC3CB871CFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0142F72-DE4D-4A0C-9876-9C2161E5088B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0142F72-DE4D-4A0C-9876-9C2161E5088B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0142F72-DE4D-4A0C-9876-9C2161E5088B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0142F72-DE4D-4A0C-9876-9C2161E5088B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{CA4DE8A0-E15E-4D6F-BE3C-96BBE249A8C7} = {1CD3D61D-849E-4742-9BD1-65C429398C6B}
 		{508E5DDB-7D3E-4E28-A8D9-6DFDAFDF7657} = {7036BAF4-A894-4519-9D3F-E198B6BD542B}
 		{91138BE7-C396-43B5-B907-CEC3CB871CFF} = {1CD3D61D-849E-4742-9BD1-65C429398C6B}
+		{D0142F72-DE4D-4A0C-9876-9C2161E5088B} = {1CD3D61D-849E-4742-9BD1-65C429398C6B}
 	EndGlobalSection
 EndGlobal

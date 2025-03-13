@@ -8,10 +8,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="FsCheck.Xunit" Version="3.0.0-rc3" />
+      <PackageReference Include="FsCheck.Xunit" Version="3.1.0" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Prelude.CSharp.Hedgehog\Prelude.CSharp.Hedgehog.csproj" />
       <ProjectReference Include="..\Prelude.CSharp\Prelude.CSharp.csproj" />
     </ItemGroup>
 

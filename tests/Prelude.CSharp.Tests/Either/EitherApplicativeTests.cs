@@ -1,6 +1,6 @@
 using System;
 using FluentAssertions;
-using FsCheck.Xunit;
+using Hedgehog.Xunit;
 
 namespace Prelude.CSharp.Tests.EitherTests;
 

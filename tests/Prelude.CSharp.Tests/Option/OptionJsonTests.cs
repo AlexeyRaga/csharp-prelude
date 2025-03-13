@@ -1,10 +1,11 @@
 using System.Text.Json;
-using FsCheck.Xunit;
+using Hedgehog.Xunit;
 
 namespace Prelude.CSharp.Tests.OptionTests;
 
 public record Person(string FirstName, Option<string> LastName, Option<int> Age);
 
+[Properties(typeof(GeneratorsConfig))]
 public sealed class OptionJsonTests
 {
     [Property]

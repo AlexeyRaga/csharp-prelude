@@ -1,9 +1,7 @@
-using System.Collections.Immutable;
 using FluentAssertions;
-using FsCheck.Xunit;
+using Hedgehog.Xunit;
 
 namespace Prelude.CSharp.Tests.ValidationTests;
-
 
 public sealed class ValidationTests
 {

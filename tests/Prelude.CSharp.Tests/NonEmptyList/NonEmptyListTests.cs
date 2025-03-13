@@ -1,12 +1,10 @@
 using System.Text.Json;
-using Prelude.CSharp.FSCheck;
 using FluentAssertions;
-using FsCheck;
-using FsCheck.Xunit;
+using Hedgehog.Xunit;
 
 namespace Prelude.CSharp.Tests.NonEmptyListTests;
 
-[Properties(Arbitrary = [typeof(PreludeArb)])]
+[Properties(typeof(GeneratorsConfig))]
 public sealed class NonEmptyListTests
 {
     static NonEmptyListTests()
@@ -41,17 +39,17 @@ public sealed class NonEmptyListTests
         new List<byte>().ToNonEmptyList().Should().Be(Option.None<NonEmptyList<byte>>());
 
     [Property]
-    public void Should_construct_from_non_empty_sequence(NonEmptyArray<byte> nel) =>
-        nel.Item.ToNonEmptyList().Should().BeEquivalentTo(Option.Some(nel));
+    public void Should_construct_from_non_empty_sequence(NonEmptyList<int> nel) =>
+        nel.ToList().ToNonEmptyList().Should().BeEquivalentTo(Option.Some(nel));
 
     [Property]
     public void Should_remove_last_element_to_none(byte item) =>
         new NonEmptyList<byte>(item, []).Remove(item).Should().Be(Option.None<NonEmptyList<byte>>());
 
     [Property]
-    public void Should_remove_first_element_to_none(byte head, NonEmptyArray<byte> tail) =>
+    public void Should_remove_first_element_to_none(byte head, NonEmptyList<byte> tail) =>
         NonEmptyList
-            .Create(head, tail.Item)
+            .Create(head, tail.ToList())
             .Remove(head)
             .Should().BeEquivalentTo(Option.Some(tail));
 

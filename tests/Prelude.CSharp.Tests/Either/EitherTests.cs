@@ -1,9 +1,9 @@
 using FluentAssertions;
-using FsCheck;
-using FsCheck.Xunit;
+using Hedgehog.Xunit;
 
 namespace Prelude.CSharp.Tests.EitherTests;
 
+[Properties(typeof(GeneratorsConfig))]
 public sealed class EitherTests
 {
     static EitherTests()
@@ -110,7 +110,7 @@ public sealed class EitherTests
     }
 
 
-    [Property(MaxTest = 3)]
+    [Property]
     public async Task BiSelect_should_transform_left_and_right(Either<int, string> value)
     {
         var result = await value
@@ -137,17 +137,19 @@ public sealed class EitherTests
     }
 
     [Property]
-    public void Traverse_should_return_left_when_any_value_is_left(NonEmptyArray<int> values)
+    public void Traverse_should_return_left_when_any_value_is_left(NonEmptyList<int> nel)
     {
+        var values = nel.ToArray();
         var threshold = values.Average();
         var result = values.Traverse(x => x >= threshold ? Either<bool, int>.NewLeft(true) : Either<bool, int>.NewRight(x));
         result.Should().BeEquivalentTo(Either<bool, List<string>>.NewLeft(true));
     }
 
     [Property]
-    public void Traverse_should_early_return(NonEmptyArray<int> values)
+    public void Traverse_should_early_return(NonEmptyList<int> nel)
     {
-        var threshold = values.Count() / 2 + 1;
+        var values = nel.ToArray();
+        var threshold = values.Length / 2 + 1;
         var result = values
             .Zip(Enumerable.Range(1, values.Count()))
             .Traverse(x => x.Second > threshold ? throw new Exception() : Either<bool, int>.NewLeft(true));

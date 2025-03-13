@@ -1,8 +1,9 @@
 using FluentAssertions;
-using FsCheck.Xunit;
+using Hedgehog.Xunit;
 
 namespace Prelude.CSharp.Tests.OptionTests;
 
+[Properties(typeof(GeneratorsConfig))]
 public sealed class OptionApplicativeTests
 {
     [Property]

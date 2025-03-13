@@ -1,16 +1,16 @@
 using FluentAssertions;
-using FsCheck;
-using FsCheck.Xunit;
+using Hedgehog.Xunit;
+
 
 namespace Prelude.CSharp.Tests.OptionTests;
 
+[Properties(typeof(GeneratorsConfig))]
 public sealed class OptionTests
 {
     static OptionTests()
     {
         AssertionOptions.AssertEquivalencyUsing(options => options.RespectingRuntimeTypes());
     }
-
 
     [Property]
     public void Select_should_map_value(byte input) =>
@@ -80,9 +80,9 @@ public sealed class OptionTests
     }
 
     [Property]
-    public void Traverse_should_early_return(NonEmptyArray<int> values)
+    public void Traverse_should_early_return(NonEmptyList<int> values)
     {
-        var threshold = values.Count() / 2 + 1;
+        var threshold = values.Count / 2 + 1;
         var result = values
             .Zip(Enumerable.Range(1, values.Count()))
             .Traverse(x => x.Second > threshold ? throw new Exception() : Option.None<int>());

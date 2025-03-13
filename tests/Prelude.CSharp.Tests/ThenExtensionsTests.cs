@@ -1,4 +1,4 @@
-using FsCheck.Xunit;
+using Hedgehog.Xunit;
 
 namespace Prelude.Tests;
 

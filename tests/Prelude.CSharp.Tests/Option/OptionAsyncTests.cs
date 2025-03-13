@@ -1,7 +1,8 @@
-using FsCheck.Xunit;
+using Hedgehog.Xunit;
 
 namespace Prelude.CSharp.Tests.OptionTests;
 
+[Properties(typeof(GeneratorsConfig))]
 public sealed class OptionAsyncTests
 {
     private static Task<Option<T>> SomeAsync<T>(T value) => Task.FromResult(Option.Some(value));

@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Hedgehog.Experimental" Version="0.8.0" />
+      <PackageReference Include="Hedgehog.Xunit" Version="0.6.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\src\Prelude.CSharp\Prelude.CSharp.csproj" />
+    </ItemGroup>
+
+</Project>

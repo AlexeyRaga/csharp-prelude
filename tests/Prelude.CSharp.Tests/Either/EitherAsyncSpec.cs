@@ -1,7 +1,8 @@
-using FsCheck.Xunit;
+using Hedgehog.Xunit;
 
 namespace Prelude.CSharp.Tests.EitherTests;
 
+[Properties(typeof(GeneratorsConfig))]
 public sealed class EitherAsyncSpec
 {
     private static Task<Either<TLeft, TRight>> RightAsync<TLeft, TRight>(TRight value) =>
