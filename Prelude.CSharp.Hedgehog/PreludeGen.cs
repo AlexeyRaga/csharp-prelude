@@ -14,15 +14,11 @@ public sealed class PreludeGen
     /// Generates an <see cref="Prelude.Option{T}"/> with a 20% chance of being <see cref="Prelude.Option.None{T}"/>
     /// </summary>
     /// <param name="valueGen">The generator for the value type </param>
-    public static Gen<Option<T>> Option<T>(Gen<T> valueGen)
-    {
-        var someGen = valueGen.Select(Prelude.Option.Some);
-        var noneGen = Gen.FromValue(Prelude.Option.None<T>());
-        return Gen.Frequency([
-            Tuple.Create(2, noneGen),
-            Tuple.Create(8, someGen),
+    public static Gen<Option<T>> Option<T>(Gen<T> valueGen) =>
+        Gen.Frequency([
+            Tuple.Create(2, Gen.FromValue(Prelude.Option.None<T>())),
+            Tuple.Create(8, valueGen.Select(Prelude.Option.Some)),
         ]);
-    }
 
     /// <summary>
     /// Generates an <see cref="Prelude.Either{TLeft, TRight}"/> with a 50% chance of being <see cref="Prelude.Either.Left{TLeft, TRight}"/>

@@ -26,7 +26,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\Prelude.CSharp.FSCheck\Prelude.CSharp.FSCheck.csproj" />
+      <ProjectReference Include="..\..\Prelude.CSharp.Hedgehog\Prelude.CSharp.Hedgehog.csproj" />
       <ProjectReference Include="..\..\src\Prelude.CSharp\Prelude.CSharp.csproj" />
     </ItemGroup>
 </Project>
